@@ -1,5 +1,7 @@
 // API Configuration for E-Kampus Frontend
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://towitdhonza.softwarez.co.zw';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://e-kampus.co.zw';
+
+console.log('API_BASE_URL:', API_BASE_URL);
 
 // API Endpoints
 export const API_ENDPOINTS = {

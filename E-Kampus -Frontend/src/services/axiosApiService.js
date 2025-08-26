@@ -18,6 +18,12 @@ class AxiosApiService {
       (config) => {
         const authHeaders = getAuthHeaders();
         config.headers = { ...config.headers, ...authHeaders };
+        console.log('Request config:', {
+          url: config.url,
+          method: config.method,
+          data: config.data,
+          headers: config.headers
+        });
         return config;
       },
       (error) => {
@@ -50,15 +56,19 @@ class AxiosApiService {
 
   // Authentication methods
   async login(credentials) {
+    console.log('Login endpoint:', API_ENDPOINTS.LOGIN)
+    console.log('Login payload:', credentials)
     return this.axiosInstance.post(API_ENDPOINTS.LOGIN, credentials);
   }
 
   async register(userData) {
+    console.log('Register endpoint:', API_ENDPOINTS.REGISTER)
+    console.log('Register payload:', userData)
     return this.axiosInstance.post(API_ENDPOINTS.REGISTER, userData);
   }
 
-  async logout() {
-    return this.axiosInstance.post(API_ENDPOINTS.LOGOUT);
+  async logout(username) {
+    return this.axiosInstance.post(API_ENDPOINTS.LOGOUT, { username });
   }
 
   async forgotPassword(email) {

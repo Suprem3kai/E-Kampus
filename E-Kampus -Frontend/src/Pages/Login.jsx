@@ -6,9 +6,9 @@ import AxiosApiService from '../services/axiosApiService'
 
 const Login = () => {
   
-  const [currentState, setCurrentState] = useState('Login')
+  const [currentState, setCurrentState] = useState('Sign Up')
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: ''
   })
@@ -29,28 +29,41 @@ const Login = () => {
 
     try {
       if (currentState === 'Login') {
-        // Handle login
+        // Handle login - API expects {username, password}
         const response = await AxiosApiService.login({
-          email: formData.email,
+          username: formData.username,
           password: formData.password
         })
         
-        if (response.success) {
-          localStorage.setItem('token', response.token)
+        console.log('Login response:', response)
+        
+        // Handle response based on actual API structure
+        if (response && (response.success || response.token || response.access_token)) {
+          const token = response.token || response.access_token || response.access
+          if (token) {
+            localStorage.setItem('token', token)
+          }
           toast.success('Login successful!')
           navigate('/')
+        } else {
+          toast.error('Login failed: Invalid credentials')
         }
       } else {
-        // Handle registration
+        // Handle registration - API expects {username, email, password}
         const response = await AxiosApiService.register({
-          name: formData.name,
+          username: formData.username,
           email: formData.email,
           password: formData.password
         })
         
-        if (response.success) {
+        console.log('Register response:', response)
+        
+        // Handle response based on actual API structure
+        if (response && (response.success || response.message === 'User created successfully' || response.id)) {
           toast.success('Registration successful!')
           setCurrentState('Login')
+        } else {
+          toast.error('Registration failed')
         }
       }
     } catch (error) {
@@ -70,37 +83,51 @@ const Login = () => {
         {currentState === 'Login' ? '' : (
           <input 
             type="text" 
-            name="name"
-            value={formData.name}
+            name="username"
+            value={formData.username}
             onChange={handleInputChange}
             className='w-full px-3 py-2 border border-gray-800' 
-            placeholder='Name'  
+            placeholder='Username'  
             required 
           />
         )}  
-        <input 
-          type="email" 
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          placeholder='Email Here' 
-          className='w-full px-3 py-2 border border-gray-800' 
-          required
-        />
+        {currentState === 'Login' ? (
+          <input 
+            type="text" 
+            name="username"
+            value={formData.username}
+            onChange={handleInputChange}
+            placeholder='Username (REG Number)' 
+            className='w-full px-3 py-2 border border-gray-800' 
+            required
+          />
+        ) : (
+          <input 
+            type="email" 
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder='Email Address' 
+            className='w-full px-3 py-2 border border-gray-800' 
+            required
+          />
+        )}
         <input 
           type="password" 
           name="password"
           value={formData.password}
           onChange={handleInputChange}
-          placeholder='Password(Input REG number)' 
+          placeholder='Password' 
           className='w-full px-3 py-2 border border-gray-800' 
           required
         />
+         
         <div className='w-full flex justify-between text-sm mt-[-8px]'>
+          {currentState === 'Login' ? (
           <Link to='/ForgotPassword'>
             <p className='cursor-pointer'>Forgot Password?</p>
           </Link>
-
+         ) : ''}
           {currentState === 'Login' ? (
             <p onClick={() => setCurrentState('Sign Up')} className='cursor-pointer'>Create Account</p>
           ) : (
