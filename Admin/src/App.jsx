@@ -11,8 +11,8 @@ import { Routes,Route } from 'react-router-dom'
 
 //export const backendURL = import.meta
 
-export const regUrl = 'https://towidhonza.softwarez.co.zw/accounts/register/'
-export const logUrl = 'https://towidhonza.softwarez.co.zw/accounts/login/'
+export const regUrl = 'https://e-kampus.co.zw/accounts/register/'
+export const logUrl = 'https://e-kampus.co.zw/accounts/login/'
 
 const App = () => {
 

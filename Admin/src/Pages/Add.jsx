@@ -40,7 +40,7 @@ const Add = () => {
     formData.append('sizes',JSON.stringify(sizes))
 
     console.log(...formData)
-    const response = await axios.post('https://towidhonza.softwarez.co.zw/api/add/', formData)
+    const response = await axios.post('https://e-kampus.co.zw/api/add/', formData)
     console.log(response.data)
   } catch(error) {
 
