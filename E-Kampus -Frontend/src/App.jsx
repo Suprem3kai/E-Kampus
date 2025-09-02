@@ -8,6 +8,7 @@ import PlaceOrder from './Pages/PlaceOrder'
 import Cart from './Pages/Cart'
 import About from './Pages/About'
 import Login from './Pages/Login'
+import Profile from './Pages/Profile'
 import Register from './Pages/Register'
 import ForgotPassword from './Pages/ForgotPassword'
 import ResetPassword from './Pages/ResetPassword'
@@ -54,6 +55,7 @@ const App = () => {
         <Route path='place-order' element={<PlaceOrder />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/Login' element={<Login />} />
+        <Route path='/Profile' element={<Profile />} />
         <Route path='/Jojo' element={<Jojo />} />
         <Route path='/Register' element={<Register />} />
         <Route path='/ForgotPassword' element={<ForgotPassword />} />

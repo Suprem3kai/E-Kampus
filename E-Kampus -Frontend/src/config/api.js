@@ -1,12 +1,12 @@
 // API Configuration for E-Kampus Frontend
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://e-kampus.co.zw';
+const API_BASE_URL = 'https://e-kampus.co.zw';
 
 console.log('API_BASE_URL:', API_BASE_URL);
 
 // API Endpoints
 export const API_ENDPOINTS = {
   // Authentication
-  REGISTER: `${API_BASE_URL}/accounts/register/`,
+  REGISTER: 'https://e-kampus.co.zw/accounts/register/',
   LOGIN: `${API_BASE_URL}/accounts/login/`,
   LOGOUT: `${API_BASE_URL}/accounts/logout/`,
   RESET_PASSWORD: `${API_BASE_URL}/accounts/reset-password/`,
@@ -49,8 +49,13 @@ export const API_ENDPOINTS = {
 export const DEFAULT_CONFIG = {
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   },
   timeout: import.meta.env.VITE_API_TIMEOUT || 10000, // Default 10 seconds
+  withCredentials: false, // Disable credentials for CORS
 };
 
 //Helper function to get authorization headers

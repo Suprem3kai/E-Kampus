@@ -43,6 +43,11 @@ const Login = () => {
           if (token) {
             localStorage.setItem('token', token)
           }
+          
+          // Store user info for profile page
+          localStorage.setItem('username', formData.username)
+          localStorage.setItem('email', formData.email || 'Email not provided')
+          
           toast.success('Login successful!')
           navigate('/')
         } else {

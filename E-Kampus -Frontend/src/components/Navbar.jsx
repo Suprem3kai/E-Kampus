@@ -65,9 +65,14 @@ const Navbar = () => {
                     </Link>
                     <div className="hidden group-hover:block transition duration-200 ease-in-out absolute right-0 pt-4">
                         <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
-                            <p onClick={()=>navigate('/Login')} className='cursor-pointer hover:text-black'>My Profile</p>
+                            <p onClick={()=>navigate('/Profile')} className='cursor-pointer hover:text-black'>My Profile</p>
                             <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
-                            <p onClick={()=>navigate('/')} className='cursor-pointer hover:text-black'>Logout</p>
+                            <p onClick={()=>{
+                                localStorage.removeItem('token')
+                                localStorage.removeItem('username')
+                                localStorage.removeItem('email')
+                                navigate('/')
+                            }} className='cursor-pointer hover:text-black'>Logout</p>
                         </div>
                     </div>
                 </div>

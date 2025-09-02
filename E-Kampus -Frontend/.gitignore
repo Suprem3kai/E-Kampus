@@ -11,6 +11,19 @@ lerna-debug.log*
 node_modules/
 *node_modules
 *.local
+.gitignore
+.gitignore.*
+*gitignore
+# Environment files
+.env
+.env.*
+*env
+
+# Services folder
+services/
+
+# API Documentation
+API_SETUP.md
 
 # UI folder
 public/UI/
